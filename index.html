@@ -19,7 +19,7 @@
 				autofocus>
 		</header>
 		<section class="main" x-show="todos.length">
-			<input id="toggle-all" class="toggle-all" type="checkbox">
+			<input x-model="allComplete" @click="toggleAllTodos" id="toggle-all" class="toggle-all" type="checkbox">
 			<label for="toggle-all">Mark all as complete</label>
 			<template x-for="todo in filteredTodos" :key="todo.id">
 				<ul class="todo-list">
@@ -47,7 +47,7 @@
 			</template>
 		</section>
 		<footer class="footer" x-show="todos.length">
-			<span class="todo-count"><strong><span x-text="active.length"></span></strong> item left</span>
+			<span class="todo-count"><strong><span x-text="active.length"></span></strong> <span x-text="(active.length === 1 ? 'item' : 'items')"></span> left</span>
 			<!-- Remove this if you don't implement routing -->
 			<ul class="filters">
 				<li>

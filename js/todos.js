@@ -22,9 +22,17 @@ window.todos = function() {
 			}[this.filter];
 		},
 
+		get allComplete() {
+			return this.todos.length === this.completed.length;
+		},
+
 		addTodo(){
+			if(this.newTodo.trim() === ''){
+				this.newTodo = '';
+				return;
+			}
 			this.todos.push({
-				id: this.todos.length+1,
+				id: Date.now,
 				body: this.newTodo,
 				completed: false
 			});
@@ -51,6 +59,11 @@ window.todos = function() {
 			todo.body = todo.cachedBody;
 			todo.cachedBody = null;
 			this.editedTodo = null;
+		},
+		toggleAllTodos(){
+			let completed = this.allComplete;
+			this.todos.forEach(todo => todo.completed = ! completed);
+
 		}
 
 	}
